@@ -1,0 +1,87 @@
+import {
+  TbBriefcase2,
+  TbBuildingSkyscraper,
+  TbDeviceMobile,
+  TbSchool,
+  TbSparkles,
+} from "react-icons/tb";
+
+import type { TimelineStage } from "@/types";
+
+export const careerJourney: TimelineStage[] = [
+  {
+    id: "education",
+    type: "education",
+    title: "Bachelor of Information Technology",
+    organization: "Canadian International College",
+    icon: TbSchool,
+    description:
+      "Built a foundation in software engineering, systems design, and business technology.",
+  },
+  {
+    id: "flutter-developer",
+    type: "work",
+    title: "Flutter Developer",
+    organization: "Remote",
+    location: "Remote",
+    duration: "1 Year",
+    icon: TbDeviceMobile,
+    bullets: [
+      "Learned the complete mobile application lifecycle",
+      "Shipped production deployments",
+      "Integrated REST APIs",
+      "Implemented authentication flows",
+      "Applied state management patterns",
+      "Practiced clean architecture",
+      "Optimized app performance",
+      "Worked with local storage",
+      "Built responsive UI",
+      "Followed Git workflow",
+      "Debugged production issues",
+    ],
+  },
+  {
+    id: "freelance",
+    type: "freelance",
+    title: "Freelance Software Engineer",
+    organization: "Self-employed",
+    icon: TbBriefcase2,
+    description: "Worked across major CMS and eCommerce platforms:",
+    tags: ["WordPress", "WooCommerce", "Shopify", "Salla", "6Valley", "EasyOrder"],
+    bullets: [
+      "Built complete websites end-to-end",
+      "Customized CMS systems",
+      "Integrated third-party APIs",
+      "Improved SEO",
+      "Improved performance",
+      "Worked directly with clients",
+      "Delivered production-ready systems",
+    ],
+  },
+  {
+    id: "etriplesoft",
+    type: "work",
+    title: "Senior Web Developer",
+    organization: "eTripleSoft",
+    location: "On-site",
+    icon: TbBuildingSkyscraper,
+    description: "Grew into a senior, on-site role focused on enterprise delivery.",
+    bullets: [
+      "Leadership",
+      "Communication",
+      "Team collaboration",
+      "AI-assisted development",
+      "Reducing development time",
+      "Working on enterprise projects",
+    ],
+  },
+  {
+    id: "current",
+    type: "current",
+    title: "Currently Learning",
+    organization: "AI Automation & Agents",
+    icon: TbSparkles,
+    description: "Expanding into intelligent, autonomous business systems:",
+    tags: ["AI Automation", "AI Agents", "LLMs", "Business Automation", "Workflow Automation"],
+  },
+];
