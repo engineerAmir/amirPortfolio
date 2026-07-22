@@ -49,7 +49,7 @@ export default async function ResumePage({
             <h1 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
               {personal.name}
             </h1>
-            <p className="text-lg font-medium text-accent-blue-light print:text-black">
+            <p className="text-lg font-medium text-primary print:text-black">
               {content.title} &middot; {content.subtitle}
             </p>
             <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted print:text-black/70">
@@ -80,7 +80,7 @@ export default async function ResumePage({
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-accent-blue-light print:text-black/70">
+                  <p className="text-sm text-primary print:text-black/70">
                     {stage.organization}
                     {stage.location ? ` — ${stage.location}` : ""}
                   </p>
@@ -108,7 +108,7 @@ export default async function ResumePage({
             {education.map((entry) => (
               <div key={entry.id}>
                 <h3 className="text-sm font-semibold">{entry.degree}</h3>
-                <p className="text-sm text-accent-blue-light print:text-black/70">
+                <p className="text-sm text-primary print:text-black/70">
                   {entry.institution}
                 </p>
                 <p className="mt-1.5 text-sm text-muted print:text-black/80">

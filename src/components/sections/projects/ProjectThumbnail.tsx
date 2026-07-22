@@ -47,7 +47,7 @@ export function ProjectThumbnail({ project }: ProjectThumbnailProps) {
     <>
       {status !== "ready" && (
         <div
-          className={`absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-accent-blue/15 via-background-elevated to-accent-purple/15 text-muted-foreground ${
+          className={`absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-primary/15 via-background-elevated to-primary-dark/15 text-muted-foreground ${
             status === "loading" ? "animate-pulse" : ""
           }`}
         >

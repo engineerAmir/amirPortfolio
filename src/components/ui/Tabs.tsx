@@ -112,7 +112,7 @@ export function TabTrigger({ id, children, className }: TabTriggerProps) {
       {isActive && (
         <motion.span
           layoutId={`${baseId}-tab-pill`}
-          className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-accent-blue to-accent-purple"
+          className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary to-primary-dark"
           transition={{ type: "spring", stiffness: 400, damping: 32 }}
         />
       )}

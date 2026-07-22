@@ -25,8 +25,8 @@ export async function CTASection() {
     <section className="relative py-24 sm:py-28">
       <Container>
         <RevealOnScroll variants={scaleIn}>
-          <div className="relative overflow-hidden rounded-[2rem] border border-border-strong bg-gradient-to-br from-accent-blue/15 via-background-elevated to-accent-purple/15 px-6 py-16 text-center sm:px-16 sm:py-20">
-            <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-purple/30 blur-[100px]" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-border-strong bg-gradient-to-br from-primary/15 via-background-elevated to-primary-dark/15 px-6 py-16 text-center sm:px-16 sm:py-20">
+            <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-dark/30 blur-[100px]" />
 
             <h2 className="relative text-balance font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
               {t("titlePrefix")} <span className="gradient-text">{t("titleHighlight")}</span>

@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { SiNextdotjs, SiReact, SiTailwindcss, SiTypescript } from "react-icons/si";
-import { TbArrowRight, TbDownload, TbSparkles } from "react-icons/tb";
+import { TbArrowRight, TbDownload } from "react-icons/tb";
 
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -19,7 +19,7 @@ import { AvatarPhoto } from "./hero/AvatarPhoto";
 
 const ORBIT_ICONS = [
   { Icon: SiReact, className: "left-[-14%] top-[12%]", color: "#61DAFB" },
-  { Icon: SiNextdotjs, className: "right-[-10%] top-[6%]", color: "#ffffff" },
+  { Icon: SiNextdotjs, className: "right-[-10%] top-[6%]", color: "#0a0a0a" },
   { Icon: SiTypescript, className: "left-[-8%] bottom-[14%]", color: "#3178C6" },
   { Icon: SiTailwindcss, className: "right-[-14%] bottom-[8%]", color: "#38BDF8" },
 ];
@@ -79,23 +79,23 @@ export function Hero() {
     >
       <div className="pointer-events-none absolute inset-0 grid-fade-mask">
         <div
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 opacity-[0.05]"
           style={{
             backgroundImage:
-              "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+              "linear-gradient(to right, black 1px, transparent 1px), linear-gradient(to bottom, black 1px, transparent 1px)",
             backgroundSize: "56px 56px",
           }}
         />
       </div>
-      <div className="pointer-events-none absolute left-1/2 top-[-10%] h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-accent-blue/20 blur-[120px]" />
-      <div className="pointer-events-none absolute right-[-10%] bottom-[-10%] h-[28rem] w-[28rem] rounded-full bg-accent-purple/20 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 top-[-10%] h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px]" />
+      <div className="pointer-events-none absolute right-[-10%] bottom-[-10%] h-[28rem] w-[28rem] rounded-full bg-primary-dark/20 blur-[120px]" />
 
       <Container className="relative grid items-center gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
         <motion.div
           variants={staggerContainer(0.12)}
           initial="hidden"
           animate="visible"
-          className="flex flex-col items-start gap-6"
+          className="order-2 flex flex-col items-start gap-6 lg:order-1"
         >
           {personal.availableForWork && (
             <motion.div
@@ -177,25 +177,14 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-          className="relative mx-auto flex h-[22rem] w-[22rem] items-center justify-center sm:h-[26rem] sm:w-[26rem]"
+          className="order-1 relative mx-auto flex w-full max-w-[16rem] items-center justify-center sm:max-w-[20rem] lg:order-2 lg:max-w-[22rem]"
         >
-          <div className="absolute inset-6 animate-blob rounded-full bg-gradient-to-br from-accent-blue/30 to-accent-purple/30 blur-2xl" />
+          <div className="absolute inset-x-4 top-6 bottom-16 -z-10 animate-blob rounded-full bg-primary/20 blur-3xl" />
 
-          <div className="glass-panel glow-shadow relative flex h-[17rem] w-[17rem] items-center justify-center rounded-[2.5rem] sm:h-[20rem] sm:w-[20rem]">
-            <AvatarPhoto />
-
-            <motion.span
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="glass-panel absolute -bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-foreground shadow-lg"
-            >
-              <TbSparkles className="text-accent-purple-light" />
-              {t("aiBadge")}
-            </motion.span>
-          </div>
+          <AvatarPhoto />
 
           {ORBIT_ICONS.map(({ Icon, className, color }, i) => (
             <motion.div

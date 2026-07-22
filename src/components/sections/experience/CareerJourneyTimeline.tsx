@@ -24,7 +24,7 @@ export function CareerJourneyTimeline() {
     >
       <div
         aria-hidden
-        className="absolute start-[1.35rem] top-2 bottom-2 hidden w-px bg-gradient-to-b from-accent-blue via-accent-purple to-transparent sm:block"
+        className="absolute start-[1.35rem] top-2 bottom-2 hidden w-px bg-gradient-to-b from-primary via-primary-dark to-transparent sm:block"
       />
 
       {careerJourney.map((stage) => (
@@ -34,7 +34,7 @@ export function CareerJourneyTimeline() {
           transition={defaultTransition}
           className="relative flex flex-col gap-4 sm:flex-row sm:gap-6"
         >
-          <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-blue to-accent-purple text-white shadow-[0_0_0_4px_var(--background)]">
+          <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary-dark text-white shadow-[0_0_0_4px_var(--background)]">
             <stage.icon size={20} />
           </div>
 
@@ -44,7 +44,7 @@ export function CareerJourneyTimeline() {
                 <h3 className="font-display text-lg font-semibold text-foreground">
                   {stage.title}
                 </h3>
-                <p className="mt-1 text-sm font-medium text-accent-blue-light">
+                <p className="mt-1 text-sm font-medium text-primary">
                   {stage.organization}
                 </p>
               </div>
@@ -72,7 +72,7 @@ export function CareerJourneyTimeline() {
               <ul className="mt-5 grid gap-x-6 gap-y-2 sm:grid-cols-2">
                 {stage.bullets.map((bullet) => (
                   <li key={bullet} className="flex items-start gap-2 text-sm text-muted">
-                    <TbCircleCheck className="mt-0.5 shrink-0 text-accent-purple-light" size={16} />
+                    <TbCircleCheck className="mt-0.5 shrink-0 text-primary-light" size={16} />
                     {bullet}
                   </li>
                 ))}

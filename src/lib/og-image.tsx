@@ -23,9 +23,9 @@ export function OgImageMarkup() {
         alignItems: "flex-start",
         justifyContent: "center",
         padding: "80px",
-        background: "#05060a",
+        background: "#ffffff",
         backgroundImage:
-          "radial-gradient(circle at 15% 20%, rgba(59,130,246,0.35), transparent 45%), radial-gradient(circle at 85% 80%, rgba(168,85,247,0.35), transparent 45%)",
+          "radial-gradient(circle at 15% 15%, rgba(134,72,121,0.14), transparent 45%), radial-gradient(circle at 85% 85%, rgba(134,72,121,0.14), transparent 45%)",
       }}
     >
       <div
@@ -36,7 +36,7 @@ export function OgImageMarkup() {
           width: 88,
           height: 88,
           borderRadius: 24,
-          background: "linear-gradient(135deg, #3b82f6, #a855f7)",
+          background: "linear-gradient(135deg, #864879, #623355)",
           color: "white",
           fontSize: 36,
           fontWeight: 700,
@@ -50,7 +50,7 @@ export function OgImageMarkup() {
           display: "flex",
           fontSize: 68,
           fontWeight: 700,
-          color: "#f5f6f8",
+          color: "#0a0a0a",
           letterSpacing: "-0.02em",
         }}
       >
@@ -62,7 +62,7 @@ export function OgImageMarkup() {
           fontSize: 34,
           fontWeight: 500,
           marginTop: 18,
-          color: "#a855f7",
+          color: "#864879",
         }}
       >
         {content.title} &nbsp;&middot;&nbsp; {content.subtitle}
@@ -72,7 +72,7 @@ export function OgImageMarkup() {
           display: "flex",
           fontSize: 26,
           marginTop: 32,
-          color: "#97a0b5",
+          color: "#5c525a",
           maxWidth: 880,
         }}
       >

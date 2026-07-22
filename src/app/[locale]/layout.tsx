@@ -40,8 +40,8 @@ export function generateStaticParams() {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#05060a",
-  colorScheme: "dark",
+  themeColor: "#ffffff",
+  colorScheme: "light",
 };
 
 export async function generateMetadata({
@@ -118,9 +118,9 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={dir}
-      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} dark h-full scroll-smooth antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-background text-foreground selection:bg-accent-purple selection:text-white">
+      <body className="flex min-h-full flex-col bg-background text-foreground selection:bg-primary selection:text-white">
         <NextIntlClientProvider>
           <JsonLd />
           <a

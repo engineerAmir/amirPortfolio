@@ -51,7 +51,7 @@ export function Navbar() {
             href="#home"
             className="flex items-center gap-2.5 text-sm font-semibold tracking-tight text-foreground"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-accent-blue to-accent-purple font-display text-sm font-bold text-white">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-dark font-display text-sm font-bold text-white">
               {personal.initials}
             </span>
             <span className="hidden sm:inline">{personal.firstName}</span>

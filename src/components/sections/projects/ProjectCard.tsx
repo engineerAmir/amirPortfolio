@@ -62,7 +62,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 flex items-center gap-1.5 text-sm font-medium text-accent-blue-light transition-colors hover:text-accent-purple-light"
+            className="mt-4 flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:text-primary-dark"
           >
             {t("visitLiveSite")}
             <TbExternalLink size={14} />

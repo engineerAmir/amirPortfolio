@@ -30,7 +30,7 @@ export function SectionHeading({
       transition={defaultTransition}
       className={cn(
         "flex flex-col gap-4",
-        align === "center" ? "items-center text-center" : "items-start text-left",
+        align === "center" ? "items-center text-center" : "items-start text-start",
         className
       )}
     >
@@ -38,7 +38,7 @@ export function SectionHeading({
         <motion.span
           variants={fadeInUp}
           transition={defaultTransition}
-          className="inline-flex items-center gap-2 rounded-full border border-border-strong bg-surface px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-accent-blue-light"
+          className="inline-flex items-center gap-2 rounded-full border border-border-strong bg-surface px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-primary"
         >
           {eyebrow}
         </motion.span>

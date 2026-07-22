@@ -10,8 +10,7 @@
   },
   "hero": {
     "availableBadge": "Available for new projects",
-    "greeting": "Hi, I'm {name}",
-    "aiBadge": "AI-Assisted Development"
+    "greeting": "Hi, I'm {name}"
   },
   "about": {
     "eyebrow": "About Me",

@@ -39,7 +39,7 @@ export function ContactSection() {
               transition={defaultTransition}
             >
               <GlassCard className="group flex h-full flex-col gap-4 p-7">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent-blue/20 to-accent-purple/20 text-accent-blue-light transition-transform duration-300 group-hover:scale-110">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary-dark/20 text-primary transition-transform duration-300 group-hover:scale-110">
                   <method.icon size={22} />
                 </span>
                 <div>
@@ -64,7 +64,7 @@ export function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={social.label}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-purple-light/50 hover:text-foreground"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-light/50 hover:text-foreground"
             >
               <social.icon size={17} />
             </a>

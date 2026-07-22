@@ -40,7 +40,7 @@ export function SkillsSection() {
                     whileHover={{ y: -3 }}
                     className="glass-panel flex items-center gap-2.5 rounded-xl px-4 py-3 text-sm font-medium text-foreground/90 transition-colors duration-300 hover:border-border-strong hover:bg-surface-hover"
                   >
-                    <skill.icon className="shrink-0 text-accent-blue-light" size={18} />
+                    <skill.icon className="shrink-0 text-primary" size={18} />
                     {skill.name}
                   </motion.div>
                 ))}

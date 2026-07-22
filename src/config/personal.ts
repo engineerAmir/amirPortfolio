@@ -16,12 +16,7 @@ const translations = {
   en: {
     title: "Software Engineer",
     subtitle: "Senior Web Developer",
-    roles: [
-      "Software Engineer",
-      "Senior Web Developer",
-      "Full Stack Engineer",
-      "AI-Assisted Builder",
-    ],
+    roles: ["Software Engineer", "Senior Web Developer", "Full Stack Engineer"],
     tagline:
       "I build scalable web applications, enterprise solutions, eCommerce platforms, and modern digital experiences.",
     aboutDescription:
@@ -32,12 +27,7 @@ const translations = {
   ar: {
     title: "مهندس برمجيات",
     subtitle: "مطوّر ويب أول",
-    roles: [
-      "مهندس برمجيات",
-      "مطوّر ويب أول",
-      "مهندس فُل ستاك",
-      "أبني بمساعدة الذكاء الاصطناعي",
-    ],
+    roles: ["مهندس برمجيات", "مطوّر ويب أول", "مهندس فُل ستاك"],
     tagline:
       "أبني تطبيقات ويب قابلة للتوسّع، وحلولًا مؤسسية، ومنصات تجارة إلكترونية، وتجارب رقمية حديثة.",
     aboutDescription:

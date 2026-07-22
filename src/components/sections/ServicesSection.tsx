@@ -37,7 +37,7 @@ export function ServicesSection() {
                   </Badge>
                 )}
 
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent-blue/20 to-accent-purple/20 text-accent-blue-light transition-transform duration-300 group-hover:scale-110">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary-dark/20 text-primary transition-transform duration-300 group-hover:scale-110">
                   <service.icon size={22} />
                 </span>
 
@@ -46,7 +46,7 @@ export function ServicesSection() {
                 </h3>
                 <p className="text-sm leading-relaxed text-muted">{service.description}</p>
 
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-accent-blue to-accent-purple transition-transform duration-300 group-hover:scale-x-100" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-primary to-primary-dark transition-transform duration-300 group-hover:scale-x-100" />
               </GlassCard>
             </motion.div>
           ))}

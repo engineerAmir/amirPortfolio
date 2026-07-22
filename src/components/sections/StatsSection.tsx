@@ -38,7 +38,7 @@ export function StatsSection() {
             return (
               <motion.div key={stat.id} variants={fadeInUp} transition={defaultTransition}>
                 <GlassCard className="flex flex-col items-center gap-3 px-4 py-8 text-center sm:py-10">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-accent-blue/20 to-accent-purple/20 text-accent-blue-light">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary-dark/20 text-primary">
                     <Icon size={20} />
                   </span>
                   <AnimatedCounter

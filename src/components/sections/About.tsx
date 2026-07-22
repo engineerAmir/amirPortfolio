@@ -35,12 +35,12 @@ export async function About() {
               </p>
 
               <div className="flex items-center gap-2 text-sm text-muted">
-                <TbMapPin className="text-accent-blue-light" size={18} />
+                <TbMapPin className="text-primary" size={18} />
                 {t("locationLine", { location: content.location })}
               </div>
 
-              <div className="mt-2 flex items-start gap-4 rounded-2xl border border-accent-purple/20 bg-accent-purple/5 p-5">
-                <TbTargetArrow className="mt-0.5 shrink-0 text-accent-purple-light" size={22} />
+              <div className="mt-2 flex items-start gap-4 rounded-2xl border border-primary-dark/20 bg-primary-dark/5 p-5">
+                <TbTargetArrow className="mt-0.5 shrink-0 text-primary-light" size={22} />
                 <div>
                   <p className="text-sm font-semibold text-foreground">
                     {t("currentGoalLabel")}
@@ -54,7 +54,7 @@ export async function About() {
           <RevealOnScroll variants={scaleIn} delay={0.1} className="lg:col-span-2">
             <GlassCard className="flex h-full flex-col gap-6 p-8 sm:p-10">
               <div className="flex items-center gap-3">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-accent-blue to-accent-purple text-white">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-dark text-white">
                   <TbSchool size={20} />
                 </span>
                 <h3 className="font-display text-lg font-semibold text-foreground">
@@ -66,7 +66,7 @@ export async function About() {
                 {education.map((entry) => (
                   <div key={entry.id} className="flex flex-col gap-2">
                     <p className="text-sm font-semibold text-foreground">{entry.institution}</p>
-                    <p className="text-sm font-medium text-accent-blue-light">{entry.degree}</p>
+                    <p className="text-sm font-medium text-primary">{entry.degree}</p>
                     <p className="text-sm leading-relaxed text-muted">{entry.description}</p>
                   </div>
                 ))}

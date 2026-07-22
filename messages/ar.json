@@ -10,8 +10,7 @@
   },
   "hero": {
     "availableBadge": "متاح لمشاريع جديدة",
-    "greeting": "مرحبًا، أنا {name}",
-    "aiBadge": "تطوير بمساعدة الذكاء الاصطناعي"
+    "greeting": "مرحبًا، أنا {name}"
   },
   "about": {
     "eyebrow": "من أنا",

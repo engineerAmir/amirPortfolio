@@ -27,7 +27,7 @@ export async function Footer() {
               href="#home"
               className="flex w-fit items-center gap-2.5 text-sm font-semibold tracking-tight text-foreground"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-accent-blue to-accent-purple font-display text-sm font-bold text-white">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-dark font-display text-sm font-bold text-white">
                 {personal.initials}
               </span>
               {personal.name}
@@ -43,7 +43,7 @@ export async function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-purple-light/50 hover:text-foreground"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-light/50 hover:text-foreground"
                 >
                   <social.icon size={16} />
                 </a>

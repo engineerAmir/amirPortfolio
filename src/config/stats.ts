@@ -2,8 +2,8 @@ import type { Locale } from "@/i18n/routing";
 import type { Stat } from "@/types";
 
 const base = [
-  { id: "years", value: 4, suffix: "+" },
-  { id: "projects", value: 15, suffix: "+" },
+  { id: "years", value: 3, suffix: "+" },
+  { id: "projects", value: 100, suffix: "+" },
   { id: "technologies", value: 20, suffix: "+" },
   { id: "clients", value: 25, suffix: "+" },
 ] as const;

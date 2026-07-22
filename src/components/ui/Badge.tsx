@@ -15,7 +15,7 @@ export function Badge({ children, className, variant = "default" }: BadgeProps) 
         "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium",
         variant === "default" && "border border-border bg-surface text-muted",
         variant === "accent" &&
-          "border border-accent-purple/30 bg-accent-purple/10 text-accent-purple-light",
+          "border border-primary/25 bg-primary/10 text-primary-dark",
         variant === "outline" && "border border-border-strong text-foreground",
         className
       )}
