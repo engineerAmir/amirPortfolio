@@ -10,13 +10,11 @@ import { personal } from "@/config/personal";
  * picked up automatically — no code change needed. Extensions are tried in
  * order; if none resolve, this falls back to the initials placeholder.
  *
- * Rendered as a rounded portrait card (no separate frame/background box
- * wrapping it) with a soft bottom fade — the source photo is tightly cropped
- * to its subject, not a true alpha-channel cutout.
+ * Expects a true alpha-channel cutout (transparent background) — rendered
+ * as a freestanding silhouette with just a drop-shadow for depth, no
+ * card/frame around it.
  */
 const AVATAR_EXTENSIONS = ["jpg", "jpeg", "png", "webp"];
-
-const FADE_MASK = "linear-gradient(to bottom, black 88%, transparent 100%)";
 
 export function AvatarPhoto() {
   const [candidateIndex, setCandidateIndex] = useState(0);
@@ -40,12 +38,11 @@ export function AvatarPhoto() {
       key={src}
       src={src}
       alt={personal.name}
-      width={844}
-      height={1481}
+      width={408}
+      height={612}
       priority
       sizes="(min-width: 1024px) 340px, (min-width: 640px) 300px, 250px"
-      className="h-auto w-[15.5rem] rounded-[2rem] object-contain drop-shadow-[0_30px_45px_-18px_rgba(0,0,0,0.35)] sm:w-[19rem] lg:w-[21rem]"
-      style={{ maskImage: FADE_MASK, WebkitMaskImage: FADE_MASK }}
+      className="h-auto w-[15.5rem] object-contain drop-shadow-[0_30px_45px_-18px_rgba(0,0,0,0.35)] sm:w-[19rem] lg:w-[21rem]"
       onError={() => {
         if (candidateIndex < AVATAR_EXTENSIONS.length - 1) {
           setCandidateIndex((i) => i + 1);
