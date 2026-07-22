@@ -1,19 +1,27 @@
-import { personal } from "@/config/personal";
-import { seo } from "@/config/seo";
-import { socialLinks } from "@/config/social";
+import { getLocale } from "next-intl/server";
 
-export function JsonLd() {
+import { getPersonalContent, personal } from "@/config/personal";
+import { seo } from "@/config/seo";
+import { getSocialLinks } from "@/config/social";
+import type { Locale } from "@/i18n/routing";
+
+export async function JsonLd() {
+  const locale = (await getLocale()) as Locale;
+  const content = seo.getContent(locale);
+  const personalContent = getPersonalContent(locale);
+  const socialLinks = getSocialLinks(locale);
+
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: personal.name,
-    jobTitle: personal.title,
-    description: seo.description,
+    jobTitle: personalContent.title,
+    description: content.description,
     url: seo.siteUrl,
     email: `mailto:${personal.email}`,
     address: {
       "@type": "PostalAddress",
-      addressCountry: personal.location,
+      addressCountry: personalContent.location,
     },
     sameAs: socialLinks
       .filter((social) => social.id !== "whatsapp")
@@ -34,8 +42,8 @@ export function JsonLd() {
     "@type": "WebSite",
     name: seo.name,
     url: seo.siteUrl,
-    description: seo.description,
-    inLanguage: "en",
+    description: content.description,
+    inLanguage: locale,
   };
 
   return (

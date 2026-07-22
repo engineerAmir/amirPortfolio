@@ -1,14 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
 import { TbCircleCheck } from "react-icons/tb";
 
 import { Badge } from "@/components/ui/Badge";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { careerJourney } from "@/config/experience";
+import { getCareerJourney } from "@/config/experience";
+import type { Locale } from "@/i18n/routing";
 import { defaultTransition, fadeInUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
 export function CareerJourneyTimeline() {
+  const locale = useLocale() as Locale;
+  const careerJourney = getCareerJourney(locale);
+
   return (
     <motion.ol
       variants={staggerContainer(0.15)}
@@ -19,7 +24,7 @@ export function CareerJourneyTimeline() {
     >
       <div
         aria-hidden
-        className="absolute left-[1.35rem] top-2 bottom-2 hidden w-px bg-gradient-to-b from-accent-blue via-accent-purple to-transparent sm:block"
+        className="absolute start-[1.35rem] top-2 bottom-2 hidden w-px bg-gradient-to-b from-accent-blue via-accent-purple to-transparent sm:block"
       />
 
       {careerJourney.map((stage) => (

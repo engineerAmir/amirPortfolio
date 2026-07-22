@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: seo.name,
     short_name: personal.firstName,
-    description: seo.description,
+    description: seo.getContent("en").description,
     start_url: "/",
     display: "standalone",
     background_color: "#05060a",

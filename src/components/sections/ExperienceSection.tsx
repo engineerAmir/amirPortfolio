@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { TbBriefcase2, TbLayoutGrid } from "react-icons/tb";
 
@@ -13,6 +14,7 @@ import { ProjectsGrid } from "./projects/ProjectsGrid";
 type ExperienceTab = "journey" | "projects";
 
 export function ExperienceSection() {
+  const t = useTranslations("experience");
   const [activeTab, setActiveTab] = useState<ExperienceTab>("journey");
 
   useEffect(() => {
@@ -32,9 +34,9 @@ export function ExperienceSection() {
 
       <Container>
         <SectionHeading
-          eyebrow="Experience"
-          title="Career journey & project work"
-          description="From learning mobile development to shipping enterprise systems — here's the path, and the work that came out of it."
+          eyebrow={t("eyebrow")}
+          title={t("title")}
+          description={t("description")}
         />
 
         <Tabs
@@ -42,17 +44,17 @@ export function ExperienceSection() {
           onValueChange={(value) => setActiveTab(value as ExperienceTab)}
           className="mt-12 flex flex-col items-center gap-10"
         >
-          <TabList label="Experience view">
+          <TabList label={t("tabsAriaLabel")}>
             <TabTrigger id="journey">
               <span className="flex items-center gap-2">
                 <TbBriefcase2 size={16} />
-                Career Journey
+                {t("tabJourney")}
               </span>
             </TabTrigger>
             <TabTrigger id="projects">
               <span className="flex items-center gap-2">
                 <TbLayoutGrid size={16} />
-                Projects
+                {t("tabProjects")}
               </span>
             </TabTrigger>
           </TabList>

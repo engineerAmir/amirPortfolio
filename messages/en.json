@@ -1,0 +1,79 @@
+{
+  "common": {
+    "hireMe": "Hire Me",
+    "viewProjects": "View Projects",
+    "downloadCv": "Download CV",
+    "whatsapp": "WhatsApp",
+    "chatOnWhatsapp": "Chat on WhatsApp",
+    "emailMe": "Email Me",
+    "skipToContent": "Skip to content"
+  },
+  "hero": {
+    "availableBadge": "Available for new projects",
+    "greeting": "Hi, I'm {name}",
+    "aiBadge": "AI-Assisted Development"
+  },
+  "about": {
+    "eyebrow": "About Me",
+    "title": "Engineering thoughtful, production-ready software",
+    "description": "A quick look at who I am, how I work, and what I'm building toward next.",
+    "locationLine": "Based in {location} — working with clients worldwide",
+    "currentGoalLabel": "Current goal",
+    "educationHeading": "Education",
+    "educationFooter": "Continuously learning — currently focused on AI automation"
+  },
+  "experience": {
+    "eyebrow": "Experience",
+    "title": "Career journey & project work",
+    "description": "From learning mobile development to shipping enterprise systems — here's the path, and the work that came out of it.",
+    "tabsAriaLabel": "Experience view",
+    "tabJourney": "Career Journey",
+    "tabProjects": "Projects"
+  },
+  "projects": {
+    "visitLiveSite": "Visit live website",
+    "openLiveSite": "Open {title} live website"
+  },
+  "skills": {
+    "eyebrow": "Skills",
+    "title": "A well-rounded, production-tested toolkit",
+    "description": "Frontend to backend, CMS platforms to AI-assisted workflows — the technologies I reach for daily."
+  },
+  "services": {
+    "eyebrow": "Services",
+    "title": "How I can help you build",
+    "description": "From a single landing page to a full enterprise platform — and soon, intelligent automation on top of it.",
+    "comingSoon": "Coming Soon"
+  },
+  "testimonials": {
+    "eyebrow": "Testimonials",
+    "title": "What clients say about working with me"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's talk about your project",
+    "description": "Pick whichever channel is easiest — I usually respond within a few hours."
+  },
+  "cta": {
+    "titlePrefix": "Let's Build Something",
+    "titleHighlight": "Amazing Together",
+    "description": "Have a project in mind? Let's turn it into a fast, polished, production-ready product."
+  },
+  "footer": {
+    "navigationHeading": "Navigation",
+    "contactHeading": "Contact",
+    "rights": "© {year} {name}. All rights reserved.",
+    "backToTop": "Back to top"
+  },
+  "resume": {
+    "printButton": "Print / Save as PDF",
+    "experienceHeading": "Experience",
+    "educationHeading": "Education",
+    "skillsHeading": "Skills"
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "english": "English",
+    "arabic": "Arabic"
+  }
+}

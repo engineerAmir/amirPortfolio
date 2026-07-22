@@ -1,23 +1,29 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 import { FaWhatsapp } from "react-icons/fa6";
 
 import { personal } from "@/config/personal";
+import type { Locale } from "@/i18n/routing";
 import { buildWhatsAppLink } from "@/lib/utils";
 
+const whatsappMessage = {
+  en: "Hi Amir, I found your portfolio and I'd like to talk about a project.",
+  ar: "مرحبًا أمير، شاهدت موقعك الشخصي وأود التحدث معك بخصوص مشروع.",
+} as const;
+
 export function WhatsAppButton() {
-  const href = buildWhatsAppLink(
-    personal.whatsappNumber,
-    "Hi Amir, I found your portfolio and I'd like to talk about a project."
-  );
+  const locale = useLocale() as Locale;
+  const t = useTranslations("common");
+  const href = buildWhatsAppLink(personal.whatsappNumber, whatsappMessage[locale]);
 
   return (
     <motion.a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp"
+      aria-label={t("chatOnWhatsapp")}
       initial={{ opacity: 0, scale: 0.6, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ delay: 1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}

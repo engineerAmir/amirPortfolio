@@ -1,13 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
 
-import { projects } from "@/config/projects";
+import { getProjects } from "@/config/projects";
+import type { Locale } from "@/i18n/routing";
 import { staggerContainer, viewportOnce } from "@/lib/motion";
 
 import { ProjectCard } from "./ProjectCard";
 
 export function ProjectsGrid() {
+  const locale = useLocale() as Locale;
+  const projects = getProjects(locale);
+
   return (
     <motion.div
       variants={staggerContainer(0.08)}

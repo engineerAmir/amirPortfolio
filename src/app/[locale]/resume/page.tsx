@@ -1,21 +1,42 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/ui/Container";
-import { education } from "@/config/education";
-import { careerJourney } from "@/config/experience";
-import { personal } from "@/config/personal";
-import { skillCategories } from "@/config/skills";
+import { getEducation } from "@/config/education";
+import { getCareerJourney } from "@/config/experience";
+import { getPersonalContent, personal } from "@/config/personal";
+import { getSkillCategories } from "@/config/skills";
+import type { Locale } from "@/i18n/routing";
 
 import { PrintButton } from "./PrintButton";
 
-export const metadata: Metadata = {
-  title: "Resume",
-  description: `Résumé for ${personal.name} — ${personal.title} & ${personal.subtitle}.`,
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const content = getPersonalContent(locale as Locale);
 
-const workStages = careerJourney.filter((stage) => stage.type !== "education");
+  return {
+    title: "Resume",
+    description: `${personal.name} — ${content.title} & ${content.subtitle}.`,
+  };
+}
 
-export default function ResumePage() {
+export default async function ResumePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: localeParam } = await params;
+  const locale = localeParam as Locale;
+  const t = await getTranslations({ locale, namespace: "resume" });
+  const content = getPersonalContent(locale);
+  const education = getEducation(locale);
+  const skillCategories = getSkillCategories(locale);
+  const workStages = getCareerJourney(locale).filter((stage) => stage.type !== "education");
+
   return (
     <div className="min-h-screen bg-background py-16 print:bg-white print:py-0">
       <Container className="max-w-4xl">
@@ -29,24 +50,24 @@ export default function ResumePage() {
               {personal.name}
             </h1>
             <p className="text-lg font-medium text-accent-blue-light print:text-black">
-              {personal.title} &middot; {personal.subtitle}
+              {content.title} &middot; {content.subtitle}
             </p>
             <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted print:text-black/70">
-              <span>{personal.email}</span>
-              <span>{personal.phone}</span>
-              <span>{personal.location}</span>
+              <bdi dir="ltr">{personal.email}</bdi>
+              <bdi dir="ltr">{personal.phone}</bdi>
+              <span>{content.location}</span>
             </div>
           </header>
 
           <section className="py-6">
             <p className="text-sm leading-relaxed text-muted print:text-black/80">
-              {personal.aboutDescription}
+              {content.aboutDescription}
             </p>
           </section>
 
           <section className="border-t border-border py-6 print:border-black/20">
             <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground print:text-black">
-              Experience
+              {t("experienceHeading")}
             </h2>
             <div className="flex flex-col gap-6">
               {workStages.map((stage) => (
@@ -82,7 +103,7 @@ export default function ResumePage() {
 
           <section className="border-t border-border py-6 print:border-black/20">
             <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground print:text-black">
-              Education
+              {t("educationHeading")}
             </h2>
             {education.map((entry) => (
               <div key={entry.id}>
@@ -99,7 +120,7 @@ export default function ResumePage() {
 
           <section className="border-t border-border pt-6 print:border-black/20">
             <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground print:text-black">
-              Skills
+              {t("skillsHeading")}
             </h2>
             <div className="flex flex-col gap-3">
               {skillCategories.map((category) => (

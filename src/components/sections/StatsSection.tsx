@@ -1,13 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
 import type { IconType } from "react-icons";
 import { TbBriefcase2, TbCode, TbStack2, TbUsers } from "react-icons/tb";
 
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { Container } from "@/components/ui/Container";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { stats } from "@/config/stats";
+import { getStats } from "@/config/stats";
+import type { Locale } from "@/i18n/routing";
 import { defaultTransition, fadeInUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
 const STAT_ICONS: Record<string, IconType> = {
@@ -18,6 +20,9 @@ const STAT_ICONS: Record<string, IconType> = {
 };
 
 export function StatsSection() {
+  const locale = useLocale() as Locale;
+  const stats = getStats(locale);
+
   return (
     <section className="relative py-16 sm:py-20">
       <Container>

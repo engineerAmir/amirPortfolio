@@ -1,9 +1,18 @@
-import { personal } from "@/config/personal";
+import { getPersonalContent, personal } from "@/config/personal";
 
 export const ogImageSize = { width: 1200, height: 630 };
 export const ogImageContentType = "image/png";
 
+/**
+ * Always renders in English, regardless of the active locale. Satori (the
+ * renderer behind next/og's ImageResponse) doesn't support Arabic glyph
+ * shaping (contextual GSUB substitution) — rendering Arabic text here
+ * throws at build time. English branding for both locales is the pragmatic
+ * tradeoff until Satori supports it.
+ */
 export function OgImageMarkup() {
+  const content = getPersonalContent("en");
+
   return (
     <div
       style={{
@@ -56,7 +65,7 @@ export function OgImageMarkup() {
           color: "#a855f7",
         }}
       >
-        {personal.title} &nbsp;&middot;&nbsp; {personal.subtitle}
+        {content.title} &nbsp;&middot;&nbsp; {content.subtitle}
       </div>
       <div
         style={{
@@ -67,7 +76,7 @@ export function OgImageMarkup() {
           maxWidth: 880,
         }}
       >
-        {personal.tagline}
+        {content.tagline}
       </div>
     </div>
   );

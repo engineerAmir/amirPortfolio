@@ -1,23 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 
 import { Container } from "@/components/ui/Container";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { contactMethods } from "@/config/contact";
-import { socialLinks } from "@/config/social";
+import { getContactMethods } from "@/config/contact";
+import { getSocialLinks } from "@/config/social";
+import type { Locale } from "@/i18n/routing";
 import { defaultTransition, fadeInUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
 export function ContactSection() {
+  const locale = useLocale() as Locale;
+  const t = useTranslations("contact");
+  const contactMethods = getContactMethods(locale);
+  const socialLinks = getSocialLinks(locale);
+
   return (
     <section id="contact" className="relative scroll-mt-28 py-24 sm:py-32">
       <Container>
-        <SectionHeading
-          eyebrow="Contact"
-          title="Let's talk about your project"
-          description="Pick whichever channel is easiest — I usually respond within a few hours."
-        />
+        <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
         <motion.div
           variants={staggerContainer(0.08)}
@@ -41,7 +44,9 @@ export function ContactSection() {
                 </span>
                 <div>
                   <p className="text-sm font-semibold text-foreground">{method.label}</p>
-                  <p className="mt-1 text-sm text-muted">{method.value}</p>
+                  <p className="mt-1 text-sm text-muted">
+                    {method.id === "whatsapp" ? method.value : <bdi dir="ltr">{method.value}</bdi>}
+                  </p>
                 </div>
                 {method.description && (
                   <p className="mt-auto text-xs text-muted-foreground">{method.description}</p>

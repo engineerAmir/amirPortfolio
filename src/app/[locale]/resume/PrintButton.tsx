@@ -1,10 +1,13 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { TbPrinter } from "react-icons/tb";
 
 import { Button } from "@/components/ui/Button";
 
 export function PrintButton() {
+  const t = useTranslations("resume");
+
   return (
     <Button
       type="button"
@@ -14,7 +17,7 @@ export function PrintButton() {
       onClick={() => window.print()}
       className="print:hidden"
     >
-      Print / Save as PDF
+      {t("printButton")}
     </Button>
   );
 }

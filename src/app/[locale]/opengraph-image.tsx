@@ -1,12 +1,17 @@
 import { ImageResponse } from "next/og";
 
 import { personal } from "@/config/personal";
+import { routing } from "@/i18n/routing";
 import { OgImageMarkup, ogImageContentType, ogImageSize } from "@/lib/og-image";
 
-export const alt = `${personal.name} — ${personal.title} & ${personal.subtitle}`;
+export const alt = `${personal.name} — Software Engineer & Senior Web Developer`;
 export const size = ogImageSize;
 export const contentType = ogImageContentType;
 
-export default function TwitterImage() {
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default function OpengraphImage() {
   return new ImageResponse(<OgImageMarkup />, size);
 }

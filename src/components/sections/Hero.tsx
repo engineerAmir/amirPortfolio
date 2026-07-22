@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { SiNextdotjs, SiReact, SiTailwindcss, SiTypescript } from "react-icons/si";
@@ -8,10 +9,13 @@ import { TbArrowRight, TbDownload, TbSparkles } from "react-icons/tb";
 
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { personal } from "@/config/personal";
-import { stats } from "@/config/stats";
+import { getPersonalContent, personal } from "@/config/personal";
+import { getStats } from "@/config/stats";
+import type { Locale } from "@/i18n/routing";
 import { defaultTransition, fadeInUp, staggerContainer } from "@/lib/motion";
 import { buildWhatsAppLink } from "@/lib/utils";
+
+import { AvatarPhoto } from "./hero/AvatarPhoto";
 
 const ORBIT_ICONS = [
   { Icon: SiReact, className: "left-[-14%] top-[12%]", color: "#61DAFB" },
@@ -20,16 +24,21 @@ const ORBIT_ICONS = [
   { Icon: SiTailwindcss, className: "right-[-14%] bottom-[8%]", color: "#38BDF8" },
 ];
 
-function RotatingRole() {
+const whatsappMessage = {
+  en: "Hi Amir, I found your portfolio and I'd like to talk about a project.",
+  ar: "مرحبًا أمير، شاهدت موقعك الشخصي وأود التحدث معك بخصوص مشروع.",
+} as const;
+
+function RotatingRole({ roles }: { roles: readonly string[] }) {
   const [index, setIndex] = useState(0);
-  const longestRole = personal.roles.reduce((a, b) => (b.length > a.length ? b : a), "");
+  const longestRole = roles.reduce((a, b) => (b.length > a.length ? b : a), "");
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % personal.roles.length);
+      setIndex((prev) => (prev + 1) % roles.length);
     }, 2600);
     return () => clearInterval(interval);
-  }, []);
+  }, [roles]);
 
   return (
     <span className="relative inline-block h-[1.3em] overflow-hidden align-bottom">
@@ -40,14 +49,14 @@ function RotatingRole() {
       </span>
       <AnimatePresence mode="wait">
         <motion.span
-          key={personal.roles[index]}
+          key={roles[index]}
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -20, opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="gradient-text absolute inset-0 whitespace-nowrap"
         >
-          {personal.roles[index]}
+          {roles[index]}
         </motion.span>
       </AnimatePresence>
     </span>
@@ -55,10 +64,13 @@ function RotatingRole() {
 }
 
 export function Hero() {
-  const whatsappHref = buildWhatsAppLink(
-    personal.whatsappNumber,
-    "Hi Amir, I found your portfolio and I'd like to talk about a project."
-  );
+  const locale = useLocale() as Locale;
+  const t = useTranslations("hero");
+  const tCommon = useTranslations("common");
+  const content = getPersonalContent(locale);
+  const stats = getStats(locale);
+  const resumeHref = locale === "en" ? personal.resumeUrl : `/${locale}${personal.resumeUrl}`;
+  const whatsappHref = buildWhatsAppLink(personal.whatsappNumber, whatsappMessage[locale]);
 
   return (
     <section
@@ -95,7 +107,7 @@ export function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
               </span>
-              Available for new projects
+              {t("availableBadge")}
             </motion.div>
           )}
 
@@ -104,9 +116,9 @@ export function Hero() {
             transition={defaultTransition}
             className="text-balance font-display text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
           >
-            Hi, I&apos;m {personal.name}
+            {t("greeting", { name: personal.name })}
             <br />
-            <RotatingRole />
+            <RotatingRole roles={content.roles} />
           </motion.h1>
 
           <motion.p
@@ -114,7 +126,7 @@ export function Hero() {
             transition={defaultTransition}
             className="max-w-xl text-balance text-base leading-relaxed text-muted sm:text-lg"
           >
-            {personal.tagline}
+            {content.tagline}
           </motion.p>
 
           <motion.div
@@ -122,19 +134,19 @@ export function Hero() {
             transition={defaultTransition}
             className="flex flex-wrap items-center gap-3 pt-2"
           >
-            <Button href="#contact" size="lg" icon={<TbArrowRight />} iconPosition="right">
-              Hire Me
+            <Button
+              href="#contact"
+              size="lg"
+              icon={<TbArrowRight className="rtl:rotate-180" />}
+              iconPosition="right"
+            >
+              {tCommon("hireMe")}
             </Button>
             <Button href="#projects" variant="secondary" size="lg">
-              View Projects
+              {tCommon("viewProjects")}
             </Button>
-            <Button
-              href={personal.resumeUrl}
-              variant="outline"
-              size="lg"
-              icon={<TbDownload />}
-            >
-              Download CV
+            <Button href={resumeHref} variant="outline" size="lg" icon={<TbDownload />}>
+              {tCommon("downloadCv")}
             </Button>
             <Button
               href={whatsappHref}
@@ -143,7 +155,7 @@ export function Hero() {
               size="lg"
               icon={<FaWhatsapp className="text-[#25D366]" />}
             >
-              WhatsApp
+              {tCommon("whatsapp")}
             </Button>
           </motion.div>
 
@@ -173,11 +185,7 @@ export function Hero() {
           <div className="absolute inset-6 animate-blob rounded-full bg-gradient-to-br from-accent-blue/30 to-accent-purple/30 blur-2xl" />
 
           <div className="glass-panel glow-shadow relative flex h-[17rem] w-[17rem] items-center justify-center rounded-[2.5rem] sm:h-[20rem] sm:w-[20rem]">
-            <div className="flex h-full w-full items-center justify-center rounded-[2.5rem] bg-gradient-to-br from-accent-blue/15 via-transparent to-accent-purple/15">
-              <span className="font-display text-7xl font-bold tracking-tight text-foreground/90 sm:text-8xl">
-                {personal.initials}
-              </span>
-            </div>
+            <AvatarPhoto />
 
             <motion.span
               animate={{ y: [0, -8, 0] }}
@@ -185,7 +193,7 @@ export function Hero() {
               className="glass-panel absolute -bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-foreground shadow-lg"
             >
               <TbSparkles className="text-accent-purple-light" />
-              AI-Assisted Development
+              {t("aiBadge")}
             </motion.span>
           </div>
 

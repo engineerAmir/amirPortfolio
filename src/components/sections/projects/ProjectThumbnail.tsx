@@ -12,24 +12,36 @@ interface ProjectThumbnailProps {
 }
 
 /**
- * WordPress mshots renders screenshots asynchronously. Until the real capture
- * is ready it serves a fixed 400x300 placeholder (HTTP 200, no error event),
- * so we detect that size on load and poll a few times before giving up.
+ * Three-tier thumbnail: a manually placed local screenshot
+ * (public/assets/projects/<id>.(jpg|jpeg|png|webp)) takes priority — drop
+ * one in and it's picked up automatically, no code change needed. If it's
+ * missing, this falls back to an auto-generated live screenshot (WordPress
+ * mshots), and if that's unavailable too, a branded placeholder with the
+ * project title.
+ *
+ * mshots renders asynchronously: until the real capture is ready it serves
+ * a fixed 400x300 placeholder (HTTP 200, no error event), so we detect that
+ * size on load and poll a few times before giving up.
  */
+const LOCAL_EXTENSIONS = ["jpg", "jpeg", "png", "webp"];
 const PLACEHOLDER_WIDTH = 400;
 const PLACEHOLDER_HEIGHT = 300;
 const MAX_RETRIES = 6;
 const RETRY_DELAY_MS = 4000;
 
 export function ProjectThumbnail({ project }: ProjectThumbnailProps) {
+  const [source, setSource] = useState<"local" | "remote">("local");
+  const [localExtIndex, setLocalExtIndex] = useState(0);
   const [status, setStatus] = useState<"loading" | "ready" | "unavailable">("loading");
   const [attempt, setAttempt] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => () => clearTimeout(timeoutRef.current), []);
 
-  const baseUrl = getSiteScreenshotUrl(project.url);
-  const src = attempt > 0 ? `${baseUrl}&retry=${attempt}` : baseUrl;
+  const localSrc = `/assets/projects/${project.id}.${LOCAL_EXTENSIONS[localExtIndex]}`;
+  const remoteBaseUrl = getSiteScreenshotUrl(project.url);
+  const remoteSrc = attempt > 0 ? `${remoteBaseUrl}&retry=${attempt}` : remoteBaseUrl;
+  const src = source === "local" ? localSrc : remoteSrc;
 
   return (
     <>
@@ -52,12 +64,17 @@ export function ProjectThumbnail({ project }: ProjectThumbnailProps) {
           src={src}
           alt={`Screenshot of the ${project.title} website`}
           fill
-          unoptimized
+          unoptimized={source === "remote"}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
           className={`object-cover object-top transition-opacity duration-500 group-hover:scale-105 ${
             status === "ready" ? "opacity-100" : "opacity-0"
           }`}
           onLoad={(event) => {
+            if (source === "local") {
+              setStatus("ready");
+              return;
+            }
+
             const img = event.currentTarget;
             const isPlaceholder =
               img.naturalWidth === PLACEHOLDER_WIDTH && img.naturalHeight === PLACEHOLDER_HEIGHT;
@@ -73,7 +90,17 @@ export function ProjectThumbnail({ project }: ProjectThumbnailProps) {
 
             setStatus("ready");
           }}
-          onError={() => setStatus("unavailable")}
+          onError={() => {
+            if (source === "local") {
+              if (localExtIndex < LOCAL_EXTENSIONS.length - 1) {
+                setLocalExtIndex((i) => i + 1);
+              } else {
+                setSource("remote");
+              }
+              return;
+            }
+            setStatus("unavailable");
+          }}
         />
       )}
     </>

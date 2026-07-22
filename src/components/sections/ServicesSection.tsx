@@ -1,23 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 
 import { Badge } from "@/components/ui/Badge";
 import { Container } from "@/components/ui/Container";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { services } from "@/config/services";
+import { getServices } from "@/config/services";
+import type { Locale } from "@/i18n/routing";
 import { defaultTransition, fadeInUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
 export function ServicesSection() {
+  const locale = useLocale() as Locale;
+  const t = useTranslations("services");
+  const services = getServices(locale);
+
   return (
     <section id="services" className="relative scroll-mt-28 py-24 sm:py-32">
       <Container>
-        <SectionHeading
-          eyebrow="Services"
-          title="How I can help you build"
-          description="From a single landing page to a full enterprise platform — and soon, intelligent automation on top of it."
-        />
+        <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
         <motion.div
           variants={staggerContainer(0.06)}
@@ -30,8 +32,8 @@ export function ServicesSection() {
             <motion.div key={service.id} variants={fadeInUp} transition={defaultTransition}>
               <GlassCard className="group relative flex h-full flex-col gap-4 overflow-hidden p-7">
                 {service.comingSoon && (
-                  <Badge variant="accent" className="absolute right-5 top-5">
-                    Coming Soon
+                  <Badge variant="accent" className="absolute end-5 top-5">
+                    {t("comingSoon")}
                   </Badge>
                 )}
 

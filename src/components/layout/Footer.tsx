@@ -1,14 +1,22 @@
+import { getLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { TbArrowUp } from "react-icons/tb";
 
 import { Container } from "@/components/ui/Container";
-import { contactMethods } from "@/config/contact";
-import { navItems } from "@/config/nav";
-import { personal } from "@/config/personal";
-import { socialLinks } from "@/config/social";
+import { getContactMethods } from "@/config/contact";
+import { getNavItems } from "@/config/nav";
+import { getPersonalContent, personal } from "@/config/personal";
+import { getSocialLinks } from "@/config/social";
+import type { Locale } from "@/i18n/routing";
 
-export function Footer() {
+export async function Footer() {
+  const locale = (await getLocale()) as Locale;
+  const t = await getTranslations("footer");
   const year = new Date().getFullYear();
+  const navItems = getNavItems(locale);
+  const socialLinks = getSocialLinks(locale);
+  const contactMethods = getContactMethods(locale);
+  const personalContent = getPersonalContent(locale);
 
   return (
     <footer className="relative border-t border-border bg-background-elevated print:hidden">
@@ -24,7 +32,9 @@ export function Footer() {
               </span>
               {personal.name}
             </Link>
-            <p className="max-w-sm text-sm leading-relaxed text-muted">{personal.tagline}</p>
+            <p className="max-w-sm text-sm leading-relaxed text-muted">
+              {personalContent.tagline}
+            </p>
             <div className="flex items-center gap-2 pt-2">
               {socialLinks.map((social) => (
                 <a
@@ -42,7 +52,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-foreground">Navigation</h3>
+            <h3 className="text-sm font-semibold text-foreground">{t("navigationHeading")}</h3>
             <ul className="mt-4 flex flex-col gap-3">
               {navItems.map((item) => (
                 <li key={item.href}>
@@ -58,7 +68,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-foreground">Contact</h3>
+            <h3 className="text-sm font-semibold text-foreground">{t("contactHeading")}</h3>
             <ul className="mt-4 flex flex-col gap-3">
               {contactMethods.map((method) => (
                 <li key={method.id}>
@@ -68,7 +78,7 @@ export function Footer() {
                     rel={method.id === "whatsapp" ? "noopener noreferrer" : undefined}
                     className="text-sm text-muted transition-colors hover:text-foreground"
                   >
-                    {method.value}
+                    {method.id === "whatsapp" ? method.value : <bdi dir="ltr">{method.value}</bdi>}
                   </a>
                 </li>
               ))}
@@ -78,13 +88,13 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col-reverse items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            © {year} {personal.name}. All rights reserved.
+            {t("rights", { year, name: personal.name })}
           </p>
           <a
             href="#home"
             className="flex items-center gap-1.5 text-xs font-medium text-muted transition-colors hover:text-foreground"
           >
-            Back to top
+            {t("backToTop")}
             <TbArrowUp size={14} />
           </a>
         </div>

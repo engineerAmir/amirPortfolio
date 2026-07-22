@@ -1,12 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 import { TbQuote, TbStarFilled } from "react-icons/tb";
 
 import { Container } from "@/components/ui/Container";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { testimonials } from "@/config/testimonials";
+import { getTestimonials } from "@/config/testimonials";
+import type { Locale } from "@/i18n/routing";
 import { defaultTransition, fadeInUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
 function initialsOf(name: string) {
@@ -19,13 +21,14 @@ function initialsOf(name: string) {
 }
 
 export function TestimonialsSection() {
+  const locale = useLocale() as Locale;
+  const t = useTranslations("testimonials");
+  const testimonials = getTestimonials(locale);
+
   return (
     <section id="testimonials" className="relative scroll-mt-28 py-24 sm:py-32">
       <Container>
-        <SectionHeading
-          eyebrow="Testimonials"
-          title="What clients say about working with me"
-        />
+        <SectionHeading eyebrow={t("eyebrow")} title={t("title")} />
 
         <motion.div
           variants={staggerContainer(0.08)}

@@ -1,21 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { skillCategories } from "@/config/skills";
+import { getSkillCategories } from "@/config/skills";
+import type { Locale } from "@/i18n/routing";
 import { defaultTransition, fadeInUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
 export function SkillsSection() {
+  const locale = useLocale() as Locale;
+  const t = useTranslations("skills");
+  const skillCategories = getSkillCategories(locale);
+
   return (
     <section id="skills" className="relative scroll-mt-28 py-24 sm:py-32">
       <Container>
-        <SectionHeading
-          eyebrow="Skills"
-          title="A well-rounded, production-tested toolkit"
-          description="Frontend to backend, CMS platforms to AI-assisted workflows — the technologies I reach for daily."
-        />
+        <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
         <div className="mt-16 flex flex-col gap-12">
           {skillCategories.map((category) => (

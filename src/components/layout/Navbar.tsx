@@ -1,22 +1,29 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { TbMenu2, TbX } from "react-icons/tb";
 
 import { Button } from "@/components/ui/Button";
-import { navItems } from "@/config/nav";
+import { getNavItems } from "@/config/nav";
 import { personal } from "@/config/personal";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { useScrolled } from "@/hooks/useScrolled";
+import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
-const SECTION_IDS = navItems.map((item) => item.href.replace("#", ""));
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function Navbar() {
+  const locale = useLocale() as Locale;
+  const t = useTranslations("common");
+  const navItems = getNavItems(locale);
+  const sectionIds = navItems.map((item) => item.href.replace("#", ""));
+
   const scrolled = useScrolled();
-  const activeId = useActiveSection(SECTION_IDS);
+  const activeId = useActiveSection(sectionIds);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
@@ -78,20 +85,24 @@ export function Navbar() {
           </ul>
 
           <div className="hidden items-center gap-3 lg:flex">
+            <LanguageSwitcher />
             <Button href="#contact" size="sm">
-              Hire Me
+              {t("hireMe")}
             </Button>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setMobileOpen((prev) => !prev)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-foreground lg:hidden"
-          >
-            {mobileOpen ? <TbX size={22} /> : <TbMenu2 size={22} />}
-          </button>
+          <div className="flex items-center gap-2 lg:hidden">
+            <LanguageSwitcher className="px-3 py-1.5 text-xs" />
+            <button
+              type="button"
+              onClick={() => setMobileOpen((prev) => !prev)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+              className="flex h-10 w-10 items-center justify-center rounded-full text-foreground"
+            >
+              {mobileOpen ? <TbX size={22} /> : <TbMenu2 size={22} />}
+            </button>
+          </div>
         </nav>
       </div>
 
@@ -127,7 +138,7 @@ export function Navbar() {
               })}
             </ul>
             <Button href="#contact" className="mt-3 w-full" onClick={() => setMobileOpen(false)}>
-              Hire Me
+              {t("hireMe")}
             </Button>
           </motion.div>
         )}
