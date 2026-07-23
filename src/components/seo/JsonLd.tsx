@@ -14,7 +14,7 @@ export async function JsonLd() {
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: personal.name,
+    name: personalContent.name,
     jobTitle: personalContent.title,
     description: content.description,
     url: seo.siteUrl,

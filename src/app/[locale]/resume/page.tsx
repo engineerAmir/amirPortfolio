@@ -20,7 +20,7 @@ export async function generateMetadata({
 
   return {
     title: "Resume",
-    description: `${personal.name} — ${content.title} & ${content.subtitle}.`,
+    description: `${content.name} — ${content.title} & ${content.subtitle}.`,
   };
 }
 
@@ -47,7 +47,7 @@ export default async function ResumePage({
         <div className="rounded-3xl border border-border bg-background-elevated p-8 text-foreground shadow-2xl print:rounded-none print:border-none print:bg-white print:p-0 print:text-black print:shadow-none sm:p-12">
           <header className="flex flex-col gap-2 border-b border-border pb-6 print:border-black/20">
             <h1 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-              {personal.name}
+              {content.name}
             </h1>
             <p className="text-lg font-medium text-primary print:text-black">
               {content.title} &middot; {content.subtitle}

@@ -30,7 +30,7 @@ export async function Footer() {
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-dark font-display text-sm font-bold text-white">
                 {personal.initials}
               </span>
-              {personal.name}
+              {personalContent.name}
             </Link>
             <p className="max-w-sm text-sm leading-relaxed text-muted">
               {personalContent.tagline}
@@ -88,7 +88,7 @@ export async function Footer() {
 
         <div className="mt-14 flex flex-col-reverse items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            {t("rights", { year, name: personal.name })}
+            {t("rights", { year, name: personalContent.name })}
           </p>
           <a
             href="#home"

@@ -7,14 +7,19 @@ import { useEffect, useState } from "react";
 import { TbMenu2, TbX } from "react-icons/tb";
 
 import { Button } from "@/components/ui/Button";
+import { RotatingText } from "@/components/ui/RotatingText";
 import { getNavItems } from "@/config/nav";
-import { personal } from "@/config/personal";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { useScrolled } from "@/hooks/useScrolled";
 import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 import { LanguageSwitcher } from "./LanguageSwitcher";
+
+const brandWords = {
+  en: ["Welcome", "Send a Message"],
+  ar: ["مرحبًا", "أرسل رسالة"],
+} as const;
 
 export function Navbar() {
   const locale = useLocale() as Locale;
@@ -48,13 +53,10 @@ export function Navbar() {
           )}
         >
           <Link
-            href="#home"
-            className="flex items-center gap-2.5 text-sm font-semibold tracking-tight text-foreground"
+            href="#contact"
+            className="flex items-center text-sm font-semibold tracking-tight text-foreground"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-dark font-display text-sm font-bold text-white">
-              {personal.initials}
-            </span>
-            <span className="hidden sm:inline">{personal.firstName}</span>
+            <RotatingText words={brandWords[locale]} className="gradient-text" />
           </Link>
 
           <ul className="hidden items-center gap-1 lg:flex">

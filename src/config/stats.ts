@@ -2,10 +2,10 @@ import type { Locale } from "@/i18n/routing";
 import type { Stat } from "@/types";
 
 const base = [
-  { id: "years", value: 3, suffix: "+" },
-  { id: "projects", value: 100, suffix: "+" },
-  { id: "technologies", value: 20, suffix: "+" },
-  { id: "clients", value: 25, suffix: "+" },
+  { id: "years", value: 3, suffix: "%" },
+  { id: "projects", value: 100, suffix: "%" },
+  { id: "technologies", value: 20, suffix: "%" },
+  { id: "clients", value: 25, suffix: "%" },
 ] as const;
 
 const labels: Record<Locale, Record<string, string>> = {

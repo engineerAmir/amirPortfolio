@@ -8,9 +8,9 @@ import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { personal } from "@/config/personal";
+import { getPersonalContent } from "@/config/personal";
 import { seo } from "@/config/seo";
-import { routing } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 
 import "../globals.css";
 
@@ -53,6 +53,7 @@ export async function generateMetadata({
   if (!hasLocale(routing.locales, locale)) notFound();
 
   const content = seo.getContent(locale);
+  const personalContent = getPersonalContent(locale as Locale);
   const path = locale === routing.defaultLocale ? "/" : `/${locale}`;
 
   return {
@@ -63,8 +64,8 @@ export async function generateMetadata({
     },
     description: content.description,
     keywords: [...content.keywords],
-    authors: [{ name: personal.name, url: seo.siteUrl }],
-    creator: personal.name,
+    authors: [{ name: personalContent.name, url: seo.siteUrl }],
+    creator: personalContent.name,
     applicationName: seo.name,
     alternates: {
       canonical: path,

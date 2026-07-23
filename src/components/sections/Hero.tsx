@@ -1,14 +1,14 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { SiNextdotjs, SiReact, SiTailwindcss, SiTypescript } from "react-icons/si";
-import { TbArrowRight, TbDownload } from "react-icons/tb";
+import { TbArrowRight } from "react-icons/tb";
 
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { RotatingText } from "@/components/ui/RotatingText";
 import { getPersonalContent, personal } from "@/config/personal";
 import { getStats } from "@/config/stats";
 import type { Locale } from "@/i18n/routing";
@@ -29,47 +29,12 @@ const whatsappMessage = {
   ar: "مرحبًا أمير، شاهدت موقعك الشخصي وأود التحدث معك بخصوص مشروع.",
 } as const;
 
-function RotatingRole({ roles }: { roles: readonly string[] }) {
-  const [index, setIndex] = useState(0);
-  const longestRole = roles.reduce((a, b) => (b.length > a.length ? b : a), "");
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % roles.length);
-    }, 2600);
-    return () => clearInterval(interval);
-  }, [roles]);
-
-  return (
-    <span className="relative inline-block h-[1.3em] overflow-hidden align-bottom">
-      {/* In-flow, invisible spacer sized to the longest role so the absolutely
-          positioned animated text below always has enough width to render without clipping. */}
-      <span className="invisible whitespace-nowrap" aria-hidden>
-        {longestRole}
-      </span>
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={roles[index]}
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -20, opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="gradient-text absolute inset-0 whitespace-nowrap"
-        >
-          {roles[index]}
-        </motion.span>
-      </AnimatePresence>
-    </span>
-  );
-}
-
 export function Hero() {
   const locale = useLocale() as Locale;
   const t = useTranslations("hero");
   const tCommon = useTranslations("common");
   const content = getPersonalContent(locale);
   const stats = getStats(locale);
-  const resumeHref = locale === "en" ? personal.resumeUrl : `/${locale}${personal.resumeUrl}`;
   const whatsappHref = buildWhatsAppLink(personal.whatsappNumber, whatsappMessage[locale]);
 
   return (
@@ -116,9 +81,9 @@ export function Hero() {
             transition={defaultTransition}
             className="text-balance font-display text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
           >
-            {t("greeting", { name: personal.name })}
+            {t("greeting", { name: content.name })}
             <br />
-            <RotatingRole roles={content.roles} />
+            <RotatingText words={content.roles} className="gradient-text" />
           </motion.h1>
 
           <motion.p
@@ -144,9 +109,6 @@ export function Hero() {
             </Button>
             <Button href="#projects" variant="secondary" size="lg">
               {tCommon("viewProjects")}
-            </Button>
-            <Button href={resumeHref} variant="outline" size="lg" icon={<TbDownload />}>
-              {tCommon("downloadCv")}
             </Button>
             <Button
               href={whatsappHref}
